@@ -1,0 +1,35 @@
+﻿/*.ink styles - the elements which will create the ripple effect. The size and position of these elements will be set by the JS code. Initially these elements will be scaled down to 0% and later animated to large fading circles on user click.*/
+.ink {
+    position: absolute;
+    border-radius: 50%;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+    /*animation effect*/
+    .ink.animate {
+        -webkit-animation: ripple 1.5s ease-out;
+        -moz-animation: ripple 1.5s ease-out;
+        animation: ripple 1.5s ease-out;
+    }
+
+@-webkit-keyframes ripple {
+    /*scale the element to 250% to safely cover the entire link and fade it out*/
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1.5);
+    }
+}
+@-moz-keyframes ripple {
+    /*scale the element to 250% to safely cover the entire link and fade it out*/
+    100% {
+        opacity: 0;
+        -moz-transform: scale(1.5);
+    }
+}
+@keyframes ripple {
+    /*scale the element to 250% to safely cover the entire link and fade it out*/
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}

@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Mushi.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DateFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">M/d/yyyy</Value>
+    </Setting>
+    <Setting Name="AuctionIntervalInHours" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="OfflineTimeSpanMilliseconds" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">30000</Value>
+    </Setting>
+    <Setting Name="AckWaitingTimeSpanMilliseconds" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5000</Value>
+    </Setting>
+    <Setting Name="AmountShare" Type="System.Decimal" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="Version" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="CdnUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://az683697.vo.msecnd.net/dotahuntcdn/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

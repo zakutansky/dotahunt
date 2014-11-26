@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f6a7e86ebeb245219debe242d73313a7" Name="Diagram1">
+        <EntityTypeShape EntityType="HireAProModel.AspNetUserLogin" Width="1.5" PointX="6.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.AspNetUser" Width="1.5" PointX="1.125" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.AuctionBid" Width="1.5" PointX="3.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.AuctionState" Width="1.5" PointX="9.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.GameOrder" Width="1.5" PointX="4.875" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.GameOrderState" Width="1.5" PointX="2.625" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.PayPal" Width="1.5" PointX="7.125" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.PlayerAuction" Width="1.5" PointX="7.875" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.Progamer" Width="1.5" PointX="0.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.ReportedOrder" Width="1.5" PointX="7.125" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HireAProModel.ProgamersView" Width="1.5" PointX="10.5" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="HireAProModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__AuctionBi__Buyer__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__GameOrder__Buyer__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__PlayerAuc__Buyer__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__Progamers__UserI__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__AuctionBi__Aucti__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__PlayerAuc__State__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__GameOrder__Selle__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__GameOrder__State__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__ReportedO__Order__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.fk_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="HireAProModel.FK__PlayerAuc__Selle__34C8D9D1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HireAProModel.SteamRequest" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HireAProModel.UsersView" Width="1.5" PointX="9.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

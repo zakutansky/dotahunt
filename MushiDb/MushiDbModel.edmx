@@ -1,0 +1,956 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HireAProModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AvatarUrl" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AuctionBids">
+          <Key>
+            <PropertyRef Name="BidId" />
+          </Key>
+          <Property Name="BidId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="AuctionId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="BuyerId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="11" Scale="2" />
+        </EntityType>
+        <EntityType Name="AuctionStates">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="GameOrders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="BuyerId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SellerId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="OrderTime" Type="datetime" />
+          <Property Name="OrderPrice" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="MatchId" Type="nvarchar" MaxLength="128" />
+          <Property Name="RoomId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="GameOrderStates">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PayPal">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PayKey" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Ack" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PlayerAuction">
+          <Key>
+            <PropertyRef Name="AuctionId" />
+          </Key>
+          <Property Name="AuctionId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="StartPrice" Type="decimal" Precision="11" Scale="2" Nullable="false" />
+          <Property Name="SellerId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EndPrice" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="BuyerId" Type="nvarchar" MaxLength="128" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Progamers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="AuctionStartPrice" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="AuctionLimit" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PayPalEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProfileUrl" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ReportedOrders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ReportedTime" Type="datetime" />
+          <Property Name="ReportedMessage" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SteamRequests">
+          <Key>
+            <PropertyRef Name="Day" />
+          </Key>
+          <Property Name="Day" Type="datetime" Nullable="false" />
+          <Property Name="SignUp" Type="int" />
+          <Property Name="SignIn" Type="int" />
+          <Property Name="HireAPro" Type="int" />
+          <Property Name="GameCheck" Type="int" />
+          <Property Name="PreGame" Type="int" />
+          <Property Name="ProLoad" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HireAPro.dbo.ProgamersView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProgamersView">
+          <Key>
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserName" />
+            
+          </Key>
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ProfileUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="AuctionStartPrice" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="AuctionLimit" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PayPalEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="AvatarUrl" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HireAPro.dbo.UsersView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UsersView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AvatarUrl" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AuctionBi__Aucti__2D27B809">
+          <End Role="PlayerAuction" Type="Self.PlayerAuction" Multiplicity="1" />
+          <End Role="AuctionBids" Type="Self.AuctionBids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerAuction">
+              <PropertyRef Name="AuctionId" />
+            </Principal>
+            <Dependent Role="AuctionBids">
+              <PropertyRef Name="AuctionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuctionBi__Buyer__2E1BDC42">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AuctionBids" Type="Self.AuctionBids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuctionBids">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GameOrder__Buyer__300424B4">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="GameOrders" Type="Self.GameOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GameOrders">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GameOrder__Selle__30F848ED">
+          <End Role="Progamers" Type="Self.Progamers" Multiplicity="1" />
+          <End Role="GameOrders" Type="Self.GameOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Progamers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="GameOrders">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GameOrder__State__31EC6D26">
+          <End Role="GameOrderStates" Type="Self.GameOrderStates" Multiplicity="1" />
+          <End Role="GameOrders" Type="Self.GameOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameOrderStates">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="GameOrders">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerAuc__Buyer__33D4B598">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="PlayerAuction" Type="Self.PlayerAuction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerAuction">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerAuc__Selle__34C8D9D1">
+          <End Role="Progamers" Type="Self.Progamers" Multiplicity="1" />
+          <End Role="PlayerAuction" Type="Self.PlayerAuction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Progamers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PlayerAuction">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerAuc__State__35BCFE0A">
+          <End Role="AuctionStates" Type="Self.AuctionStates" Multiplicity="1" />
+          <End Role="PlayerAuction" Type="Self.PlayerAuction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuctionStates">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="PlayerAuction">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Progamers__UserI__2F10007B">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Progamers" Type="Self.Progamers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Progamers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReportedO__Order__36B12243">
+          <End Role="GameOrders" Type="Self.GameOrders" Multiplicity="1" />
+          <End Role="ReportedOrders" Type="Self.ReportedOrders" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GameOrders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="ReportedOrders">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_OrderId">
+          <End Role="GameOrders" Type="Self.GameOrders" Multiplicity="1" />
+          <End Role="PayPal" Type="Self.PayPal" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GameOrders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="PayPal">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HireAProModelStoreContainer">
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuctionBids" EntityType="Self.AuctionBids" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuctionStates" EntityType="Self.AuctionStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GameOrders" EntityType="Self.GameOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GameOrderStates" EntityType="Self.GameOrderStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayPal" EntityType="Self.PayPal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerAuction" EntityType="Self.PlayerAuction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Progamers" EntityType="Self.Progamers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportedOrders" EntityType="Self.ReportedOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SteamRequests" EntityType="Self.SteamRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgamersView" EntityType="Self.ProgamersView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProgamersView].[ProviderKey] AS [ProviderKey], 
+    [ProgamersView].[Id] AS [Id], 
+    [ProgamersView].[UserName] AS [UserName], 
+    [ProgamersView].[ProfileUrl] AS [ProfileUrl], 
+    [ProgamersView].[AuctionStartPrice] AS [AuctionStartPrice], 
+    [ProgamersView].[AuctionLimit] AS [AuctionLimit], 
+    [ProgamersView].[Status] AS [Status], 
+    [ProgamersView].[PayPalEmail] AS [PayPalEmail], 
+    [ProgamersView].[AvatarUrl] AS [AvatarUrl], 
+    [ProgamersView].[Price] AS [Price]
+    FROM [dbo].[ProgamersView] AS [ProgamersView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UsersView" EntityType="Self.UsersView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UsersView].[Id] AS [Id], 
+    [UsersView].[ProviderKey] AS [ProviderKey], 
+    [UsersView].[AvatarUrl] AS [AvatarUrl], 
+    [UsersView].[UserName] AS [UserName]
+    FROM [dbo].[UsersView] AS [UsersView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__AuctionBi__Aucti__2D27B809" Association="Self.FK__AuctionBi__Aucti__2D27B809">
+            <End Role="PlayerAuction" EntitySet="PlayerAuction" />
+            <End Role="AuctionBids" EntitySet="AuctionBids" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuctionBi__Buyer__2E1BDC42" Association="Self.FK__AuctionBi__Buyer__2E1BDC42">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AuctionBids" EntitySet="AuctionBids" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GameOrder__Buyer__300424B4" Association="Self.FK__GameOrder__Buyer__300424B4">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="GameOrders" EntitySet="GameOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GameOrder__Selle__30F848ED" Association="Self.FK__GameOrder__Selle__30F848ED">
+            <End Role="Progamers" EntitySet="Progamers" />
+            <End Role="GameOrders" EntitySet="GameOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GameOrder__State__31EC6D26" Association="Self.FK__GameOrder__State__31EC6D26">
+            <End Role="GameOrderStates" EntitySet="GameOrderStates" />
+            <End Role="GameOrders" EntitySet="GameOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerAuc__Buyer__33D4B598" Association="Self.FK__PlayerAuc__Buyer__33D4B598">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PlayerAuction" EntitySet="PlayerAuction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerAuc__Selle__34C8D9D1" Association="Self.FK__PlayerAuc__Selle__34C8D9D1">
+            <End Role="Progamers" EntitySet="Progamers" />
+            <End Role="PlayerAuction" EntitySet="PlayerAuction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerAuc__State__35BCFE0A" Association="Self.FK__PlayerAuc__State__35BCFE0A">
+            <End Role="AuctionStates" EntitySet="AuctionStates" />
+            <End Role="PlayerAuction" EntitySet="PlayerAuction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Progamers__UserI__2F10007B" Association="Self.FK__Progamers__UserI__2F10007B">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Progamers" EntitySet="Progamers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReportedO__Order__36B12243" Association="Self.FK__ReportedO__Order__36B12243">
+            <End Role="GameOrders" EntitySet="GameOrders" />
+            <End Role="ReportedOrders" EntitySet="ReportedOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="fk_OrderId" Association="Self.fk_OrderId">
+            <End Role="GameOrders" EntitySet="GameOrders" />
+            <End Role="PayPal" EntitySet="PayPal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HireAProModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AvatarUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AuctionBids" Relationship="Self.FK__AuctionBi__Buyer__2E1BDC42" FromRole="AspNetUsers" ToRole="AuctionBids" />
+          <NavigationProperty Name="GameOrders" Relationship="Self.FK__GameOrder__Buyer__300424B4" FromRole="AspNetUsers" ToRole="GameOrders" />
+          <NavigationProperty Name="PlayerAuctions" Relationship="Self.FK__PlayerAuc__Buyer__33D4B598" FromRole="AspNetUsers" ToRole="PlayerAuction" />
+          <NavigationProperty Name="Progamer" Relationship="Self.FK__Progamers__UserI__2F10007B" FromRole="AspNetUsers" ToRole="Progamers" />
+        </EntityType>
+        <EntityType Name="AuctionBid">
+          <Key>
+            <PropertyRef Name="BidId" />
+          </Key>
+          <Property Name="BidId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AuctionId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BuyerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="11" Scale="2" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__AuctionBi__Buyer__2E1BDC42" FromRole="AuctionBids" ToRole="AspNetUsers" />
+          <NavigationProperty Name="PlayerAuction" Relationship="Self.FK__AuctionBi__Aucti__2D27B809" FromRole="AuctionBids" ToRole="PlayerAuction" />
+        </EntityType>
+        <EntityType Name="AuctionState">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PlayerAuctions" Relationship="Self.FK__PlayerAuc__State__35BCFE0A" FromRole="AuctionStates" ToRole="PlayerAuction" />
+        </EntityType>
+        <EntityType Name="GameOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="BuyerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SellerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderTime" Type="DateTime" Precision="3" />
+          <Property Name="OrderPrice" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="MatchId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoomId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__GameOrder__Buyer__300424B4" FromRole="GameOrders" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Progamer" Relationship="Self.FK__GameOrder__Selle__30F848ED" FromRole="GameOrders" ToRole="Progamers" />
+          <NavigationProperty Name="GameOrderState" Relationship="Self.FK__GameOrder__State__31EC6D26" FromRole="GameOrders" ToRole="GameOrderStates" />
+          <NavigationProperty Name="ReportedOrder" Relationship="Self.FK__ReportedO__Order__36B12243" FromRole="GameOrders" ToRole="ReportedOrders" />
+          <NavigationProperty Name="PayPal" Relationship="Self.fk_OrderId" FromRole="GameOrders" ToRole="PayPal" />
+        </EntityType>
+        <EntityType Name="GameOrderState">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GameOrders" Relationship="Self.FK__GameOrder__State__31EC6D26" FromRole="GameOrderStates" ToRole="GameOrders" />
+        </EntityType>
+        <EntityType Name="PayPal">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PayKey" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ack" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GameOrder" Relationship="Self.fk_OrderId" FromRole="PayPal" ToRole="GameOrders" />
+        </EntityType>
+        <EntityType Name="PlayerAuction">
+          <Key>
+            <PropertyRef Name="AuctionId" />
+          </Key>
+          <Property Name="AuctionId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartPrice" Type="Decimal" Precision="11" Scale="2" Nullable="false" />
+          <Property Name="SellerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EndPrice" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="BuyerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__PlayerAuc__Buyer__33D4B598" FromRole="PlayerAuction" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AuctionBids" Relationship="Self.FK__AuctionBi__Aucti__2D27B809" FromRole="PlayerAuction" ToRole="AuctionBids" />
+          <NavigationProperty Name="AuctionState" Relationship="Self.FK__PlayerAuc__State__35BCFE0A" FromRole="PlayerAuction" ToRole="AuctionStates" />
+          <NavigationProperty Name="Progamer" Relationship="Self.FK__PlayerAuc__Selle__34C8D9D1" FromRole="PlayerAuction" ToRole="Progamers" />
+        </EntityType>
+        <EntityType Name="Progamer">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="AuctionStartPrice" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="AuctionLimit" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PayPalEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Progamers__UserI__2F10007B" FromRole="Progamers" ToRole="AspNetUsers" />
+          <NavigationProperty Name="GameOrders" Relationship="Self.FK__GameOrder__Selle__30F848ED" FromRole="Progamers" ToRole="GameOrders" />
+          <NavigationProperty Name="PlayerAuctions" Relationship="Self.FK__PlayerAuc__Selle__34C8D9D1" FromRole="Progamers" ToRole="PlayerAuction" />
+        </EntityType>
+        <EntityType Name="ReportedOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReportedTime" Type="DateTime" Precision="3" />
+          <Property Name="ReportedMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GameOrder" Relationship="Self.FK__ReportedO__Order__36B12243" FromRole="ReportedOrders" ToRole="GameOrders" />
+        </EntityType>
+        <EntityType Name="ProgamersView">
+          <Key>
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfileUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="AuctionStartPrice" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="AuctionLimit" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PayPalEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AvatarUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuctionBi__Buyer__2E1BDC42">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="AuctionBids" Type="Self.AuctionBid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuctionBids">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GameOrder__Buyer__300424B4">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="GameOrders" Type="Self.GameOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GameOrders">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerAuc__Buyer__33D4B598">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="PlayerAuction" Type="Self.PlayerAuction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayerAuction">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Progamers__UserI__2F10007B">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Progamers" Type="Self.Progamer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Progamers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuctionBi__Aucti__2D27B809">
+          <End Role="PlayerAuction" Type="Self.PlayerAuction" Multiplicity="1" />
+          <End Role="AuctionBids" Type="Self.AuctionBid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerAuction">
+              <PropertyRef Name="AuctionId" />
+            </Principal>
+            <Dependent Role="AuctionBids">
+              <PropertyRef Name="AuctionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerAuc__State__35BCFE0A">
+          <End Role="AuctionStates" Type="Self.AuctionState" Multiplicity="1" />
+          <End Role="PlayerAuction" Type="Self.PlayerAuction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuctionStates">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="PlayerAuction">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GameOrder__Selle__30F848ED">
+          <End Role="Progamers" Type="Self.Progamer" Multiplicity="1" />
+          <End Role="GameOrders" Type="Self.GameOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Progamers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="GameOrders">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GameOrder__State__31EC6D26">
+          <End Role="GameOrderStates" Type="Self.GameOrderState" Multiplicity="1" />
+          <End Role="GameOrders" Type="Self.GameOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameOrderStates">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="GameOrders">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReportedO__Order__36B12243">
+          <End Role="GameOrders" Type="Self.GameOrder" Multiplicity="1" />
+          <End Role="ReportedOrders" Type="Self.ReportedOrder" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GameOrders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="ReportedOrders">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_OrderId">
+          <End Role="GameOrders" Type="Self.GameOrder" Multiplicity="1" />
+          <End Role="PayPal" Type="Self.PayPal" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GameOrders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="PayPal">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerAuc__Selle__34C8D9D1">
+          <End Role="Progamers" Type="Self.Progamer" Multiplicity="1" />
+          <End Role="PlayerAuction" Type="Self.PlayerAuction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Progamers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PlayerAuction">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HireAProEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="AuctionBids" EntityType="Self.AuctionBid" />
+          <EntitySet Name="AuctionStates" EntityType="Self.AuctionState" />
+          <EntitySet Name="GameOrders" EntityType="Self.GameOrder" />
+          <EntitySet Name="GameOrderStates" EntityType="Self.GameOrderState" />
+          <EntitySet Name="PayPals" EntityType="Self.PayPal" />
+          <EntitySet Name="PlayerAuctions" EntityType="Self.PlayerAuction" />
+          <EntitySet Name="Progamers" EntityType="Self.Progamer" />
+          <EntitySet Name="ReportedOrders" EntityType="Self.ReportedOrder" />
+          <EntitySet Name="ProgamersViews" EntityType="Self.ProgamersView" />
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuctionBi__Buyer__2E1BDC42" Association="Self.FK__AuctionBi__Buyer__2E1BDC42">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AuctionBids" EntitySet="AuctionBids" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GameOrder__Buyer__300424B4" Association="Self.FK__GameOrder__Buyer__300424B4">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="GameOrders" EntitySet="GameOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerAuc__Buyer__33D4B598" Association="Self.FK__PlayerAuc__Buyer__33D4B598">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PlayerAuction" EntitySet="PlayerAuctions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Progamers__UserI__2F10007B" Association="Self.FK__Progamers__UserI__2F10007B">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Progamers" EntitySet="Progamers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuctionBi__Aucti__2D27B809" Association="Self.FK__AuctionBi__Aucti__2D27B809">
+            <End Role="PlayerAuction" EntitySet="PlayerAuctions" />
+            <End Role="AuctionBids" EntitySet="AuctionBids" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerAuc__State__35BCFE0A" Association="Self.FK__PlayerAuc__State__35BCFE0A">
+            <End Role="AuctionStates" EntitySet="AuctionStates" />
+            <End Role="PlayerAuction" EntitySet="PlayerAuctions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GameOrder__Selle__30F848ED" Association="Self.FK__GameOrder__Selle__30F848ED">
+            <End Role="Progamers" EntitySet="Progamers" />
+            <End Role="GameOrders" EntitySet="GameOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GameOrder__State__31EC6D26" Association="Self.FK__GameOrder__State__31EC6D26">
+            <End Role="GameOrderStates" EntitySet="GameOrderStates" />
+            <End Role="GameOrders" EntitySet="GameOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReportedO__Order__36B12243" Association="Self.FK__ReportedO__Order__36B12243">
+            <End Role="GameOrders" EntitySet="GameOrders" />
+            <End Role="ReportedOrders" EntitySet="ReportedOrders" />
+          </AssociationSet>
+          <AssociationSet Name="fk_OrderId" Association="Self.fk_OrderId">
+            <End Role="GameOrders" EntitySet="GameOrders" />
+            <End Role="PayPal" EntitySet="PayPals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerAuc__Selle__34C8D9D1" Association="Self.FK__PlayerAuc__Selle__34C8D9D1">
+            <End Role="Progamers" EntitySet="Progamers" />
+            <End Role="PlayerAuction" EntitySet="PlayerAuctions" />
+          </AssociationSet>
+          <EntitySet Name="SteamRequests" EntityType="HireAProModel.SteamRequest" />
+          <EntitySet Name="UsersViews" EntityType="HireAProModel.UsersView" />
+        </EntityContainer>
+        <EntityType Name="SteamRequest">
+          <Key>
+            <PropertyRef Name="Day" />
+          </Key>
+          <Property Name="Day" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SignUp" Type="Int32" />
+          <Property Name="SignIn" Type="Int32" />
+          <Property Name="HireAPro" Type="Int32" />
+          <Property Name="GameCheck" Type="Int32" />
+          <Property Name="PreGame" Type="Int32" />
+          <Property Name="ProLoad" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UsersView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AvatarUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HireAProModelStoreContainer" CdmEntityContainer="HireAProEntities">
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="HireAProModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="HireAProModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AvatarUrl" ColumnName="AvatarUrl" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuctionBids">
+            <EntityTypeMapping TypeName="HireAProModel.AuctionBid">
+              <MappingFragment StoreEntitySet="AuctionBids">
+                <ScalarProperty Name="BidId" ColumnName="BidId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="AuctionId" ColumnName="AuctionId" />
+                <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuctionStates">
+            <EntityTypeMapping TypeName="HireAProModel.AuctionState">
+              <MappingFragment StoreEntitySet="AuctionStates">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameOrders">
+            <EntityTypeMapping TypeName="HireAProModel.GameOrder">
+              <MappingFragment StoreEntitySet="GameOrders">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+                <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameOrderStates">
+            <EntityTypeMapping TypeName="HireAProModel.GameOrderState">
+              <MappingFragment StoreEntitySet="GameOrderStates">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayPals">
+            <EntityTypeMapping TypeName="HireAProModel.PayPal">
+              <MappingFragment StoreEntitySet="PayPal">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="PayKey" ColumnName="PayKey" />
+                <ScalarProperty Name="Ack" ColumnName="Ack" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerAuctions">
+            <EntityTypeMapping TypeName="HireAProModel.PlayerAuction">
+              <MappingFragment StoreEntitySet="PlayerAuction">
+                <ScalarProperty Name="AuctionId" ColumnName="AuctionId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartPrice" ColumnName="StartPrice" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+                <ScalarProperty Name="EndPrice" ColumnName="EndPrice" />
+                <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Progamers">
+            <EntityTypeMapping TypeName="HireAProModel.Progamer">
+              <MappingFragment StoreEntitySet="Progamers">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AuctionStartPrice" ColumnName="AuctionStartPrice" />
+                <ScalarProperty Name="AuctionLimit" ColumnName="AuctionLimit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PayPalEmail" ColumnName="PayPalEmail" />
+                <ScalarProperty Name="ProfileUrl" ColumnName="ProfileUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportedOrders">
+            <EntityTypeMapping TypeName="HireAProModel.ReportedOrder">
+              <MappingFragment StoreEntitySet="ReportedOrders">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ReportedTime" ColumnName="ReportedTime" />
+                <ScalarProperty Name="ReportedMessage" ColumnName="ReportedMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgamersViews">
+            <EntityTypeMapping TypeName="HireAProModel.ProgamersView">
+              <MappingFragment StoreEntitySet="ProgamersView">
+                <ScalarProperty Name="AvatarUrl" ColumnName="AvatarUrl" />
+                <ScalarProperty Name="PayPalEmail" ColumnName="PayPalEmail" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AuctionLimit" ColumnName="AuctionLimit" />
+                <ScalarProperty Name="AuctionStartPrice" ColumnName="AuctionStartPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProfileUrl" ColumnName="ProfileUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SteamRequests">
+            <EntityTypeMapping TypeName="HireAProModel.SteamRequest">
+              <MappingFragment StoreEntitySet="SteamRequests">
+                <ScalarProperty Name="ProLoad" ColumnName="ProLoad" />
+                <ScalarProperty Name="PreGame" ColumnName="PreGame" />
+                <ScalarProperty Name="GameCheck" ColumnName="GameCheck" />
+                <ScalarProperty Name="HireAPro" ColumnName="HireAPro" />
+                <ScalarProperty Name="SignIn" ColumnName="SignIn" />
+                <ScalarProperty Name="SignUp" ColumnName="SignUp" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersViews">
+            <EntityTypeMapping TypeName="HireAProModel.UsersView">
+              <MappingFragment StoreEntitySet="UsersView">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AvatarUrl" ColumnName="AvatarUrl" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
