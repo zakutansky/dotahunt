@@ -34,7 +34,7 @@ The only question is how many players like us there are. Players who admire pros
 To find the community like us and create a great product that suites our wants (adding functionality and modifying the app) & get the interest from pro-gamers. In dream case we would love to expand the project to games like League of Legends or Counter Strike.
 
 
-How to reach us?D
+How to reach us?
 If you have any questions, suggestions or feedback go ahead and contacts us:
 Twitter: @dotahunt https://twitter.com/dotahunt
 E-mail: info@dotahunt.com
